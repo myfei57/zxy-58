@@ -8,15 +8,14 @@ import (
 type Doser struct {
 	Flow   *circulate.Flow
 	Target float64
-	cached float64
 }
 
 func NewDoser(flow *circulate.Flow, target float64) *Doser {
-	return &Doser{Flow: flow, Target: target, cached: flow.Rate()}
+	return &Doser{Flow: flow, Target: target}
 }
 
 func (d *Doser) Amount() float64 {
-	return d.Target * d.cached
+	return d.Target * d.Flow.Rate()
 }
 
 func (d *Doser) Apply() float64 {
