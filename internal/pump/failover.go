@@ -15,9 +15,9 @@ func Failover(r *Roster, flow *circulate.Flow) error {
 	if r.Standby.Running {
 		return nil
 	}
-	r.Primary.Running = false
-	flow.SetRunning(false)
+	// 先启动备用泵并确认流量建立后再停主泵，避免主备切换瞬间循环流量掉零触发低流量告警。
 	r.Standby.Running = true
 	flow.SetRunning(true)
+	r.Primary.Running = false
 	return nil
 }
