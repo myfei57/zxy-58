@@ -1,0 +1,7 @@
+.git
+.verification-cache
+evidence
+data
+*.log
+*.tmp
+*.exe
