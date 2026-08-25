@@ -33,11 +33,11 @@ func Restore(v *ReturnValves, branches []string, rec *seq.Recorder) error {
 	if v == nil {
 		return errNilReturn
 	}
-	v.OpenMain()
-	rec.Add("main-open")
 	for _, b := range branches {
 		v.OpenBranch(b)
 	}
 	rec.Add("branch-open")
+	v.OpenMain()
+	rec.Add("main-open")
 	return nil
 }
