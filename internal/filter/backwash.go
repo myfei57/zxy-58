@@ -13,9 +13,10 @@ func Backwash(v *Valve, dv *drain.Valve, rec *seq.Recorder) error {
 	if v == nil || dv == nil {
 		return errNilValve
 	}
-	v.SwitchToRinse()
-	rec.Add("valve-rinse")
+	// 排污阀须先于过滤阀切换，避免阀位切换瞬间杂质回流到池体。
 	dv.OpenDrain()
 	rec.Add("drain-open")
+	v.SwitchToRinse()
+	rec.Add("valve-rinse")
 	return nil
 }
