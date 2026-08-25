@@ -22,8 +22,8 @@ func (c *Control) Stabilize() float64 {
 }
 
 func Run(c *Control, d *chlor.Doser, rec *seq.Recorder) {
-	d.Apply()
-	rec.Add("chlor-dose")
 	c.Stabilize()
 	rec.Add("ph-stabilize")
+	d.Apply()
+	rec.Add("chlor-dose")
 }
